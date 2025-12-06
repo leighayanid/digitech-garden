@@ -1,0 +1,151 @@
+// Prisma schema for Digitech Garden
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  notes        Note[]
+  dailyNotes   DailyNote[]
+  readingItems ReadingItem[]
+  snippets     Snippet[]
+  tags         Tag[]
+}
+
+model ReadingItem {
+  id        String   @id @default(uuid())
+  url       String
+  title     String?
+  note      String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+}
+
+model Snippet {
+  id          String   @id @default(uuid())
+  title       String
+  content     String
+  language    String
+  description String?
+  tags        String? // JSON string or comma-separated
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Core Note model with growth stages
+model Note {
+  id          String      @id @default(cuid())
+  title       String
+  content     String      // Markdown content
+  slug        String      @unique
+  growthStage GrowthStage @default(SEEDLING)
+  isPublic    Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tags           NoteTag[]
+  linksFrom      NoteLink[] @relation("LinksFrom")
+  linksTo        NoteLink[] @relation("LinksTo")
+  dailyNoteMentions DailyNoteLink[]
+
+  @@index([userId])
+  @@index([growthStage])
+}
+
+// Growth stages for notes
+enum GrowthStage {
+  SEEDLING  // 🌱 Initial ideas
+  BUDDING   // 🌿 Developing
+  EVERGREEN // 🌳 Polished
+}
+
+// Tags for categorization
+model Tag {
+  id        String   @id @default(cuid())
+  name      String
+  color     String   @default("#888888")
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  notes NoteTag[]
+
+  @@unique([userId, name])
+  @@index([userId])
+}
+
+// Many-to-many relation between notes and tags
+model NoteTag {
+  noteId String
+  tagId  String
+
+  note Note @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([noteId, tagId])
+}
+
+// Bi-directional links between notes
+model NoteLink {
+  id         String   @id @default(cuid())
+  fromNoteId String
+  toNoteId   String
+  context    String?  // Optional context snippet
+  createdAt  DateTime @default(now())
+
+  fromNote Note @relation("LinksFrom", fields: [fromNoteId], references: [id], onDelete: Cascade)
+  toNote   Note @relation("LinksTo", fields: [toNoteId], references: [id], onDelete: Cascade)
+
+  @@unique([fromNoteId, toNoteId])
+  @@index([toNoteId])
+}
+
+// Daily notes / journal entries
+model DailyNote {
+  id        String   @id @default(cuid())
+  date      DateTime @unique // Date without time
+  content   String   // Markdown content
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  mentionedNotes DailyNoteLink[]
+
+  @@index([userId])
+  @@index([date])
+}
+
+// Links from daily notes to regular notes
+model DailyNoteLink {
+  dailyNoteId String
+  noteId      String
+
+  dailyNote DailyNote @relation(fields: [dailyNoteId], references: [id], onDelete: Cascade)
+  note      Note      @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  @@id([dailyNoteId, noteId])
+}
