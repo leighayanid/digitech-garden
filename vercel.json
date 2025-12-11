@@ -1,0 +1,13 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".output/public",
+  "env": {
+    "NUXT_SESSION_PASSWORD": "@neon_session_password",
+    "DATABASE_URL": "@neon_database_url"
+  },
+  "functions": {
+    "api/**": {
+      "maxDuration": 60
+    }
+  }
+}
