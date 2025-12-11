@@ -1,4 +1,4 @@
-import prisma from '#lib/prisma'
+import prisma from '#root/server/prisma'
 
 export default defineEventHandler(async (event) => {
     const session = await getUserSession(event)

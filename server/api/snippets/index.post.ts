@@ -1,7 +1,7 @@
 export default defineEventHandler(async (event) => {
     const session = await requireUserSession(event)
     const body = await readBody(event)
-    const prisma = await import('#lib/prisma').then((r) => r.default)
+    const prisma = await import('../../prisma').then((r) => r.default)
 
     if (!body.title || !body.content || !body.language) {
         throw createError({
