@@ -119,18 +119,18 @@ const { data: newsItems, status: newsStatus, refresh: refreshNews } = await useF
             </div>
 
             <!-- Top Level Tabs -->
-            <div class="flex gap-1 bg-stone-100 p-1 rounded-xl border border-soft">
+            <div class="flex gap-1 bg-hover p-1 rounded-xl border border-soft">
                 <button 
                     @click="activeTab = 'repos'"
                     class="px-4 py-2 text-sm font-medium rounded-lg transition-all"
-                    :class="activeTab === 'repos' ? 'bg-white text-black shadow-sm' : 'text-stone-500 hover:text-stone-700'"
+                    :class="activeTab === 'repos' ? 'bg-card text-main shadow-sm' : 'text-subtle hover:text-muted'"
                 >
                     Repositories
                 </button>
                 <button 
                     @click="activeTab = 'news'"
                     class="px-4 py-2 text-sm font-medium rounded-lg transition-all"
-                    :class="activeTab === 'news' ? 'bg-white text-black shadow-sm' : 'text-stone-500 hover:text-stone-700'"
+                    :class="activeTab === 'news' ? 'bg-card text-main shadow-sm' : 'text-subtle hover:text-muted'"
                 >
                     Tech News
                 </button>
@@ -143,13 +143,13 @@ const { data: newsItems, status: newsStatus, refresh: refreshNews } = await useF
             <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
                 <button v-for="lang in languages" :key="lang" @click="selectedLanguage = lang"
                     class="px-3 py-1.5 text-sm rounded-lg transition-all whitespace-nowrap border border-transparent"
-                    :class="selectedLanguage === lang ? 'bg-stone-800 text-white shadow-sm' : 'bg-stone-50 text-stone-600 border-stone-200 hover:border-stone-300'">
+                    :class="selectedLanguage === lang ? 'bg-elevated text-main shadow-sm' : 'bg-hover text-muted border-DEFAULT hover:border-DEFAULT'">
                     {{ lang }}
                 </button>
             </div>
 
             <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div v-for="i in 6" :key="i" class="h-48 bg-stone-100 rounded-2xl animate-pulse" />
+                <div v-for="i in 6" :key="i" class="h-48 bg-hover rounded-2xl animate-pulse" />
             </div>
 
             <div v-else-if="error" class="text-center py-20">
@@ -160,7 +160,7 @@ const { data: newsItems, status: newsStatus, refresh: refreshNews } = await useF
             <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Repo Cards (Same as before) -->
                 <div v-for="repo in repos" :key="repo.id"
-                    class="group bg-white border border-transparent hover:border-soft hover:shadow-lg transition-all duration-300 rounded-2xl p-5 flex flex-col h-full relative overflow-hidden">
+                    class="group bg-card border border-transparent hover:border-soft hover:shadow-lg transition-all duration-300 rounded-2xl p-5 flex flex-col h-full relative overflow-hidden">
                     <div
                         class="absolute top-0 right-0 p-[200px] bg-gradient-to-bl from-stone-50/50 to-transparent pointer-events-none group-hover:from-stone-100/50 transition-all rounded-full translate-x-1/2 -translate-y-1/2" />
 
@@ -176,16 +176,16 @@ const { data: newsItems, status: newsStatus, refresh: refreshNews } = await useF
                             </div>
                         </div>
                         <span v-if="repo.language"
-                            class="text-xs font-mono bg-stone-100 px-2 py-1 rounded-md text-stone-600 border border-stone-200">
+                            class="text-xs font-mono bg-hover px-2 py-1 rounded-md text-muted border border-DEFAULT">
                             {{ repo.language }}
                         </span>
                     </div>
 
-                    <p class="text-sm text-stone-600 mb-6 flex-1 leading-relaxed font-light line-clamp-3">
+                    <p class="text-sm text-muted mb-6 flex-1 leading-relaxed font-light line-clamp-3">
                         {{ repo.description }}
                     </p>
 
-                    <div class="flex items-center justify-between pt-4 border-t border-dotted border-stone-200">
+                    <div class="flex items-center justify-between pt-4 border-t border-dotted border-DEFAULT">
                         <div class="flex gap-4 text-xs text-muted font-mono">
                             <span class="flex items-center gap-1">
                                 <UIcon name="i-heroicons-star" class="text-amber-400" />
@@ -198,7 +198,7 @@ const { data: newsItems, status: newsStatus, refresh: refreshNews } = await useF
                         </div>
 
                         <UButton size="xs" color="neutral" variant="ghost" :loading="addingToReading === repo.id"
-                            @click="addToReading(repo)" icon="i-heroicons-bookmark" class="hover:bg-stone-100">
+                            @click="addToReading(repo)" icon="i-heroicons-bookmark" class="hover:bg-hover">
                             Plant Seed
                         </UButton>
                     </div>
@@ -212,13 +212,13 @@ const { data: newsItems, status: newsStatus, refresh: refreshNews } = await useF
              <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
                 <button v-for="cat in newsCategories" :key="cat" @click="newsFilter = cat"
                     class="px-3 py-1.5 text-sm rounded-lg transition-all whitespace-nowrap border border-transparent"
-                    :class="newsFilter === cat ? 'bg-stone-800 text-white shadow-sm' : 'bg-stone-50 text-stone-600 border-stone-200 hover:border-stone-300'">
+                    :class="newsFilter === cat ? 'bg-elevated text-main shadow-sm' : 'bg-hover text-muted border-DEFAULT hover:border-DEFAULT'">
                     {{ cat }}
                 </button>
             </div>
 
             <div v-if="newsStatus === 'pending'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div v-for="i in 6" :key="i" class="h-48 bg-stone-100 rounded-2xl animate-pulse" />
+                <div v-for="i in 6" :key="i" class="h-48 bg-hover rounded-2xl animate-pulse" />
             </div>
 
             <div v-else-if="newsStatus === 'error'" class="text-center py-20">
@@ -228,28 +228,28 @@ const { data: newsItems, status: newsStatus, refresh: refreshNews } = await useF
 
             <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div v-for="item in newsItems" :key="item.id" 
-                    class="group bg-white border border-soft hover:border-stone-300 hover:shadow-md transition-all rounded-2xl p-5 flex flex-col h-full">
+                    class="group bg-card border border-soft hover:border-DEFAULT hover:shadow-md transition-all rounded-2xl p-5 flex flex-col h-full">
                     
                     <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-medium px-2 py-1 rounded bg-stone-100 text-stone-600">
+                        <span class="text-xs font-medium px-2 py-1 rounded bg-hover text-muted">
                             {{ item.category }}
                         </span>
                         <span class="text-xs text-muted">{{ item.date }}</span>
                     </div>
 
-                    <h3 class="text-lg font-serif font-bold text-main mb-2 group-hover:text-stone-700 transition-colors line-clamp-2">
+                    <h3 class="text-lg font-serif font-bold text-main mb-2 group-hover:text-muted transition-colors line-clamp-2">
                         {{ item.title }}
                     </h3>
 
-                    <p class="text-sm text-stone-600 mb-4 flex-1 font-light leading-relaxed line-clamp-3">
+                    <p class="text-sm text-muted mb-4 flex-1 font-light leading-relaxed line-clamp-3">
                         {{ item.summary }}
                     </p>
 
                     <div class="flex items-center justify-between pt-4 border-t border-soft mt-auto">
-                        <span class="text-xs font-medium text-stone-500 uppercase tracking-wide truncate max-w-[120px]">
+                        <span class="text-xs font-medium text-subtle uppercase tracking-wide truncate max-w-[120px]">
                             {{ item.source }}
                         </span>
-                        <a :href="item.url" target="_blank" class="text-sm font-medium text-black hover:underline flex items-center gap-1">
+                        <a :href="item.url" target="_blank" class="text-sm font-medium text-main hover:underline flex items-center gap-1">
                             Read 
                             <UIcon name="i-heroicons-arrow-up-right" class="w-3 h-3" />
                         </a>

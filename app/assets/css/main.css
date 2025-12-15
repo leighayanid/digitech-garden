@@ -219,6 +219,15 @@ h6 {
   background-color: var(--color-text-tertiary);
 }
 
+/* Placeholder Utilities */
+.placeholder-muted::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.placeholder-subtle::placeholder {
+  color: var(--color-text-tertiary);
+}
+
 /* Component Styles */
 .card-soft {
   background-color: var(--color-bg-card);

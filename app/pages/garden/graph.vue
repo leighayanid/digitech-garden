@@ -63,16 +63,16 @@ const growthColor = (stage: string) => {
 
         <div class="flex gap-6 flex-1 min-h-0">
             <!-- Graph visualization area -->
-            <div class="flex-1 border border-soft rounded-2xl p-6 bg-white relative overflow-hidden shadow-sm">
+            <div class="flex-1 border border-soft rounded-2xl p-6 bg-card relative overflow-hidden shadow-sm">
                 <template v-if="graphData?.nodes?.length">
                     <!-- Simple CSS-based graph visualization -->
                     <div class="flex flex-wrap gap-4 items-start content-start h-full overflow-y-auto p-2">
                         <button v-for="node in graphData.nodes" :key="node.id" @click="selectNode(node)"
                             @dblclick="goToNote(node.id)"
-                            class="px-4 py-3 rounded-xl border transition-all text-left bg-white shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                            class="px-4 py-3 rounded-xl border transition-all text-left bg-card shadow-sm hover:shadow-md hover:-translate-y-0.5"
                             :class="selectedNode?.id === node.id
-                                ? 'border-stone-400 ring-1 ring-stone-900/10'
-                                : 'border-soft hover:border-stone-300'" :style="{
+                                ? 'border-strong ring-1 ring-elevated/10'
+                                : 'border-soft hover:border-DEFAULT'" :style="{
                                     borderLeftWidth: '4px',
                                     borderLeftColor: growthColor(node.growthStage)
                                 }">
@@ -97,7 +97,7 @@ const growthColor = (stage: string) => {
                 </template>
 
                 <div
-                    class="absolute bottom-6 left-6 px-3 py-1.5 bg-white/80 backdrop-blur rounded-lg border border-soft text-xs text-muted">
+                    class="absolute bottom-6 left-6 px-3 py-1.5 bg-card/80 backdrop-blur rounded-lg border border-soft text-xs text-muted">
                     Click to select • Double-click to open
                 </div>
             </div>
@@ -106,7 +106,7 @@ const growthColor = (stage: string) => {
             <transition enter-active-class="transition duration-200 ease-out" enter-from-class="opacity-0 translate-x-4"
                 enter-to-class="opacity-100 translate-x-0" leave-active-class="transition duration-150 ease-in"
                 leave-from-class="opacity-100 translate-x-0" leave-to-class="opacity-0 translate-x-4">
-                <div v-if="selectedNode" class="w-64 border border-soft rounded-2xl p-5 bg-white shadow-sm h-fit">
+                <div v-if="selectedNode" class="w-64 border border-soft rounded-2xl p-5 bg-card shadow-sm h-fit">
                     <div class="flex items-center gap-2 mb-3">
                         <span class="text-2xl">{{ growthIcon(selectedNode.growthStage) }}</span>
                     </div>

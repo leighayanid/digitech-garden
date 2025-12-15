@@ -75,17 +75,17 @@ async function deleteItem(id: string) {
         </div>
 
         <!-- Add Item Form -->
-        <div class="card-soft p-6 mb-10 bg-white">
+        <div class="card-soft p-6 mb-10 bg-card">
             <form @submit.prevent="addItem" class="space-y-4">
                 <div class="flex flex-col gap-4">
                     <UInput v-model="url" type="url" placeholder="https://example.com/article" icon="i-heroicons-link"
                         size="md" required class="w-full"
-                        :ui="{ rounded: 'rounded-xl', base: 'bg-stone-50 border-soft' }" />
+                        :ui="{ rounded: 'rounded-xl', base: 'bg-hover border-soft' }" />
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <UInput v-model="title" placeholder="Title (optional)" size="md"
-                            :ui="{ rounded: 'rounded-xl', base: 'bg-stone-50 border-soft' }" />
+                            :ui="{ rounded: 'rounded-xl', base: 'bg-hover border-soft' }" />
                         <UInput v-model="note" placeholder="Note (optional)" size="md"
-                            :ui="{ rounded: 'rounded-xl', base: 'bg-stone-50 border-soft' }" />
+                            :ui="{ rounded: 'rounded-xl', base: 'bg-hover border-soft' }" />
                     </div>
                 </div>
                 <div class="flex justify-end pt-2">
@@ -96,12 +96,12 @@ async function deleteItem(id: string) {
 
         <!-- Active Items -->
         <div v-if="activeItems.length" class="space-y-6 mb-12">
-            <h2 class="text-sm font-medium text-muted uppercase tracking-wider pl-2 border-l-2 border-stone-300">
+            <h2 class="text-sm font-medium text-muted uppercase tracking-wider pl-2 border-l-2 border-DEFAULT">
                 To Read
             </h2>
             <div class="grid gap-3">
                 <div v-for="item in activeItems" :key="item.id"
-                    class="flex items-start gap-4 p-4 bg-white rounded-2xl border border-soft hover:shadow-sm transition-all group">
+                    class="flex items-start gap-4 p-4 bg-card rounded-2xl border border-soft hover:shadow-sm transition-all group">
                     <UCheckbox :model-value="item.read" @update:model-value="toggleRead(item)" name="read"
                         class="mt-1" />
                     <div class="flex-1 min-w-0">
@@ -109,10 +109,10 @@ async function deleteItem(id: string) {
                             class="text-lg font-medium text-main hover:underline decoration-stone-300 font-serif block truncate">
                             {{ item.title || item.url }}
                         </a>
-                        <p v-if="item.title" class="text-sm text-stone-500 truncate mb-1">
+                        <p v-if="item.title" class="text-sm text-subtle truncate mb-1">
                             {{ item.url }}
                         </p>
-                        <p v-if="item.note" class="text-sm text-stone-600 bg-stone-50 p-2 rounded-lg inline-block mt-2">
+                        <p v-if="item.note" class="text-sm text-muted bg-hover p-2 rounded-lg inline-block mt-2">
                             {{ item.note }}
                         </p>
                     </div>
@@ -124,12 +124,12 @@ async function deleteItem(id: string) {
 
         <!-- Read Items -->
         <div v-if="readItems.length" class="space-y-6">
-            <h2 class="text-sm font-medium text-muted uppercase tracking-wider pl-2 border-l-2 border-stone-200">
+            <h2 class="text-sm font-medium text-muted uppercase tracking-wider pl-2 border-l-2 border-DEFAULT">
                 Finished
             </h2>
             <div class="space-y-2 opacity-70 hover:opacity-100 transition-opacity">
                 <div v-for="item in readItems" :key="item.id"
-                    class="flex items-start gap-4 p-4 rounded-xl group hover:bg-white hover:shadow-sm">
+                    class="flex items-start gap-4 p-4 rounded-xl group hover:bg-card hover:shadow-sm">
                     <UCheckbox :model-value="item.read" @update:model-value="toggleRead(item)" name="read"
                         class="mt-1" />
                     <div class="flex-1 min-w-0">
@@ -144,11 +144,11 @@ async function deleteItem(id: string) {
             </div>
         </div>
 
-        <div v-if="!items?.length" class="text-center py-16 border-2 border-dashed border-stone-100 rounded-3xl">
+        <div v-if="!items?.length" class="text-center py-16 border-2 border-dashed border-soft rounded-3xl">
             <p class="text-lg text-muted font-light mb-2">
                 Your reading list is empty.
             </p>
-            <p class="text-sm text-stone-500">
+            <p class="text-sm text-subtle">
                 Add articles, videos, or resources to consume later.
             </p>
         </div>

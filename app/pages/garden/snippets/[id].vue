@@ -101,12 +101,12 @@ const parseTags = (tags: string | null) => {
                         <div class="flex items-center gap-3 mb-2">
                             <h1 class="text-3xl font-serif text-main">{{ snippet.title }}</h1>
                             <span
-                                class="text-xs px-2 py-1 bg-stone-100 rounded-md font-mono uppercase text-stone-600 border border-stone-200">
+                                class="text-xs px-2 py-1 bg-hover rounded-md font-mono uppercase text-muted border border-DEFAULT">
                                 {{ snippet.language }}
                             </span>
                         </div>
                         <div class="flex gap-2">
-                            <span v-for="tag in parseTags(snippet.tags)" :key="tag" class="text-xs text-stone-500">
+                            <span v-for="tag in parseTags(snippet.tags)" :key="tag" class="text-xs text-subtle">
                                 #{{ tag }}
                             </span>
                         </div>
@@ -125,8 +125,8 @@ const parseTags = (tags: string | null) => {
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl border border-soft overflow-hidden">
-                    <div class="bg-stone-50 px-4 py-2 border-b border-stone-100 flex justify-between items-center">
+                <div class="bg-card rounded-xl border border-soft overflow-hidden">
+                    <div class="bg-hover px-4 py-2 border-b border-soft flex justify-between items-center">
                         <span class="text-xs font-mono text-muted">{{ snippet.language }}</span>
                     </div>
                     <div class="p-6 overflow-x-auto text-sm" v-html="renderedCode"></div>
@@ -136,9 +136,9 @@ const parseTags = (tags: string | null) => {
             <!-- Edit Mode -->
             <form v-else @submit.prevent="saveEdit" class="space-y-6">
                 <input v-model="editTitle"
-                    class="w-full text-3xl font-serif border-b border-soft bg-transparent outline-none py-2 text-main placeholder-stone-400" />
+                    class="w-full text-3xl font-serif border-b border-soft bg-transparent outline-none py-2 text-main placeholder-subtle" />
                 <textarea v-model="editContent" rows="15"
-                    class="w-full font-mono bg-stone-900 text-stone-100 rounded-xl p-4 text-sm resize-none placeholder-stone-500" />
+                    class="w-full font-mono bg-body text-main rounded-xl p-4 text-sm resize-none placeholder-subtle" />
                 <div class="flex gap-3">
                     <UButton type="submit" :loading="loading" color="neutral">Save Changes</UButton>
                     <UButton variant="ghost" color="neutral" @click="isEditing = false">Cancel</UButton>

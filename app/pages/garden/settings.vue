@@ -44,9 +44,9 @@ async function saveSettings() {
             </p>
         </div>
 
-        <div class="bg-white/50 backdrop-blur-sm border border-soft rounded-2xl p-8 shadow-sm">
+        <div class="bg-card/50 backdrop-blur-sm border border-soft rounded-2xl p-8 shadow-sm">
             <h2 class="text-xl font-serif text-main mb-6 flex items-center gap-2">
-                <UIcon name="i-heroicons-user-circle" class="w-6 h-6 text-stone-500" />
+                <UIcon name="i-heroicons-user-circle" class="w-6 h-6 text-subtle" />
                 Profile Information
             </h2>
 
@@ -57,7 +57,7 @@ async function saveSettings() {
                     <div class="relative">
                         <UInput :model-value="user?.email" type="email" size="lg" disabled
                             icon="i-heroicons-envelope"
-                            :ui="{ base: 'bg-stone-100 border-soft text-stone-500 rounded-xl' }" />
+                            :ui="{ base: 'bg-hover border-soft text-subtle rounded-xl' }" />
                     </div>
                     <p class="mt-1.5 text-xs text-muted">
                         Email address is managed by your account provider.
@@ -69,11 +69,11 @@ async function saveSettings() {
                     <label class="block text-sm font-medium text-main mb-2">Display Name</label>
                     <UInput v-model="name" type="text" size="lg" placeholder="Your name"
                         icon="i-heroicons-face-smile"
-                        :ui="{ base: 'bg-white border-soft focus:ring-stone-200 focus:border-stone-400 rounded-xl' }" />
+                        :ui="{ base: 'bg-card border-soft focus:ring-accent focus:border-accent rounded-xl' }" />
                 </div>
 
                 <!-- Status Message -->
-                <div v-if="message" class="p-3 rounded-xl text-sm flex items-center gap-2 bg-stone-50 border border-soft" 
+                <div v-if="message" class="p-3 rounded-xl text-sm flex items-center gap-2 bg-hover border border-soft" 
                     :class="message.includes('Failed') ? 'text-red-600 bg-red-50 border-red-100' : 'text-green-600 bg-green-50 border-green-100'">
                     <UIcon :name="message.includes('Failed') ? 'i-heroicons-exclamation-circle' : 'i-heroicons-check-circle'" class="w-5 h-5" />
                     {{ message }}
@@ -81,7 +81,7 @@ async function saveSettings() {
 
                 <div class="pt-4 border-t border-soft flex justify-end">
                     <UButton type="submit" size="lg" color="neutral" :loading="saving" 
-                        class="rounded-xl px-8 font-medium transition-transform active:scale-95 bg-black text-white hover:bg-stone-800">
+                        class="rounded-xl px-8 font-medium transition-transform active:scale-95 bg-black text-main hover:bg-hover">
                         Save Changes
                     </UButton>
                 </div>

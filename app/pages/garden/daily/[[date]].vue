@@ -85,13 +85,13 @@ function goToToday() {
     <div class="max-w-2xl">
         <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
-                <button @click="goToPreviousDay" class="p-1 hover:bg-stone-100 rounded text-stone-700 hover:text-stone-900">
+                <button @click="goToPreviousDay" class="p-1 hover:bg-hover rounded text-muted hover:text-main">
                     ←
                 </button>
                 <h1 class="text-sm font-medium text-main">
                     {{ formatDate }}
                 </h1>
-                <button @click="goToNextDay" class="p-1 hover:bg-stone-100 rounded text-stone-700 hover:text-stone-900">
+                <button @click="goToNextDay" class="p-1 hover:bg-hover rounded text-muted hover:text-main">
                     →
                 </button>
             </div>
@@ -99,12 +99,12 @@ function goToToday() {
                 <UButton v-if="dateParam" size="xs" color="neutral" variant="ghost" @click="goToToday">
                     Today
                 </UButton>
-                <span v-if="saving" class="text-xs text-stone-500">Saving...</span>
+                <span v-if="saving" class="text-xs text-subtle">Saving...</span>
             </div>
         </div>
 
         <textarea v-model="content" @input="debouncedSave"
             placeholder="What's on your mind today? Use [[Note Title]] to link to notes..." rows="20"
-            class="w-full text-sm bg-transparent border border-soft rounded px-3 py-2 outline-none focus:border-stone-400 resize-none font-mono text-main placeholder:text-stone-400" />
+            class="w-full text-sm bg-transparent border border-soft rounded px-3 py-2 outline-none focus:border-accent resize-none font-mono text-main placeholder:text-subtle" />
     </div>
 </template>

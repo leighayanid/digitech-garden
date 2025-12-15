@@ -121,7 +121,7 @@ const growthIcon = (stage: string) => {
                             <div class="flex items-center gap-3 text-sm text-muted">
                                 <span>Updated {{ new Date(note.updatedAt).toLocaleDateString() }}</span>
                                 <span v-for="tag in note.tags" :key="tag.id"
-                                    class="px-2 py-0.5 bg-stone-100 rounded-full text-stone-600 border border-stone-200">
+                                    class="px-2 py-0.5 bg-hover rounded-full text-muted border border-DEFAULT">
                                     #{{ tag.name }}
                                 </span>
                             </div>
@@ -140,11 +140,11 @@ const growthIcon = (stage: string) => {
                 <MarkdownRenderer :content="note.content" class="mb-12" />
 
                 <!-- Backlinks -->
-                <div v-if="note.backlinks.length" class="mt-12 p-6 bg-stone-50 rounded-2xl border border-soft">
+                <div v-if="note.backlinks.length" class="mt-12 p-6 bg-hover rounded-2xl border border-soft">
                     <h2 class="text-sm font-medium text-muted uppercase tracking-wider mb-4">Linked from</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <NuxtLink v-for="link in note.backlinks" :key="link.id" :to="`/garden/notes/${link.id}`"
-                            class="flex items-center gap-3 p-3 bg-white rounded-xl border border-transparent hover:border-soft hover:shadow-sm transition-all text-stone-700 hover:text-black">
+                            class="flex items-center gap-3 p-3 bg-card rounded-xl border border-transparent hover:border-soft hover:shadow-sm transition-all text-muted hover:text-main">
                             <span class="text-lg">{{ growthIcon(link.growthStage) }}</span>
                             <span class="font-medium font-serif">{{ link.title }}</span>
                         </NuxtLink>
@@ -157,7 +157,7 @@ const growthIcon = (stage: string) => {
                 <form @submit.prevent="saveEdit" class="space-y-6">
                     <div>
                         <input v-model="editTitle" type="text"
-                            class="w-full text-3xl font-serif bg-transparent border-b border-soft focus:border-stone-400 outline-none py-2 text-main placeholder-stone-300 transition-colors"
+                            class="w-full text-3xl font-serif bg-transparent border-b border-soft focus:border-accent outline-none py-2 text-main placeholder-stone-300 transition-colors"
                             placeholder="Note Title" />
                     </div>
 
@@ -165,8 +165,8 @@ const growthIcon = (stage: string) => {
                         <button v-for="stage in stages" :key="stage.value" type="button"
                             @click="editGrowthStage = stage.value"
                             class="px-3 py-1.5 text-sm rounded-lg transition-all border" :class="editGrowthStage === stage.value
-                                ? 'bg-stone-800 text-white border-stone-800'
-                                : 'bg-white text-stone-600 border-soft hover:border-stone-400'">
+                                ? 'bg-elevated text-main border-strong'
+                                : 'bg-card text-muted border-soft hover:border-strong'">
                             {{ stage.label }}
                         </button>
                     </div>
@@ -174,19 +174,19 @@ const growthIcon = (stage: string) => {
                     <div>
                         <div class="flex flex-wrap gap-2 mb-3">
                             <span v-for="tag in editTags" :key="tag"
-                                class="text-sm px-2.5 py-1 rounded-full bg-stone-100 border border-stone-200 text-stone-700 flex items-center gap-1.5">
+                                class="text-sm px-2.5 py-1 rounded-full bg-hover border border-DEFAULT text-muted flex items-center gap-1.5">
                                 #{{ tag }}
                                 <button type="button" @click="removeTag(tag)"
-                                    class="hover:text-red-500 text-stone-400 transition-colors">×</button>
+                                    class="hover:text-red-500 text-subtle transition-colors">×</button>
                             </span>
                         </div>
                         <input v-model="tagInput" @keydown.enter.prevent="addTag" type="text"
                             placeholder="Add tags + Enter"
-                            class="w-full text-sm bg-stone-50 border border-soft rounded-lg px-3 py-2 outline-none focus:bg-white focus:border-stone-400 transition-all text-main placeholder-stone-400" />
+                            class="w-full text-sm bg-hover border border-soft rounded-lg px-3 py-2 outline-none focus:bg-card focus:border-accent transition-all text-main placeholder-subtle" />
                     </div>
 
                     <textarea v-model="editContent" rows="18"
-                        class="w-full text-base bg-white border border-soft rounded-xl px-4 py-3 outline-none focus:border-stone-400 resize-none font-mono leading-relaxed text-main placeholder-stone-400"
+                        class="w-full text-base bg-card border border-soft rounded-xl px-4 py-3 outline-none focus:border-accent resize-none font-mono leading-relaxed text-main placeholder-subtle"
                         placeholder="Start writing..." />
 
                     <div class="flex gap-3 pt-4 border-t border-soft">

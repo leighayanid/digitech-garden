@@ -62,8 +62,8 @@ watch(filter, () => refresh())
         <div class="flex gap-2 mb-8">
             <button v-for="f in filters" :key="f.value" @click="filter = f.value"
                 class="px-3 py-1.5 text-sm rounded-lg border transition-all" :class="filter === f.value
-                    ? 'bg-stone-800 text-white border-stone-800'
-                    : 'bg-white text-stone-600 border-soft hover:border-stone-400'">
+                    ? 'bg-elevated text-main border-strong'
+                    : 'bg-card text-muted border-soft hover:border-DEFAULT'">
                 {{ f.label }}
             </button>
         </div>
@@ -71,15 +71,15 @@ watch(filter, () => refresh())
         <!-- Notes list -->
         <div class="grid gap-3">
             <NuxtLink v-for="note in notes" :key="note.id" :to="`/garden/notes/${note.id}`"
-                class="flex items-center gap-4 p-4 rounded-xl border border-transparent bg-white hover:border-soft hover:shadow-sm transition-all group">
+                class="flex items-center gap-4 p-4 rounded-xl border border-transparent bg-card hover:border-soft hover:shadow-sm transition-all group">
                 <span class="text-xl">{{ growthIcon(note.growthStage) }}</span>
                 <div class="flex-1 min-w-0">
-                    <div class="text-lg font-serif text-main group-hover:text-black transition-colors truncate">
+                    <div class="text-lg font-serif text-main group-hover:text-accent transition-colors truncate">
                         {{ note.title }}
                     </div>
                     <div class="flex items-center gap-3 mt-1">
                         <span v-for="tag in note.tags.slice(0, 3)" :key="tag.id"
-                            class="text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-500">
+                            class="text-xs px-2 py-0.5 rounded-full bg-hover text-subtle">
                             #{{ tag.name }}
                         </span>
                         <span v-if="note.linkCount" class="text-xs text-muted flex items-center gap-1">
@@ -94,7 +94,7 @@ watch(filter, () => refresh())
             </NuxtLink>
 
             <div v-if="!notes?.length"
-                class="text-center py-16 border-2 border-dashed border-stone-200 rounded-2xl bg-stone-50/50">
+                class="text-center py-16 border-2 border-dashed border-DEFAULT rounded-2xl bg-hover/50">
                 <p class="text-muted mb-2 font-serif text-lg">Your garden is empty.</p>
                 <NuxtLink to="/garden/notes/new" class="text-main hover:underline font-medium">Create your first note
                 </NuxtLink>

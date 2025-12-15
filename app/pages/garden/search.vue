@@ -38,14 +38,14 @@ const growthIcon = (stage: string) => {
 
         <div class="mb-8">
             <input v-model="query" type="text" placeholder="Type to search..." autofocus
-                class="w-full text-xl bg-white border border-soft rounded-2xl px-5 py-4 outline-none focus:border-stone-400 focus:shadow-sm transition-all text-main placeholder-stone-400" />
+                class="w-full text-xl bg-card border border-soft rounded-2xl px-5 py-4 outline-none focus:border-accent focus:shadow-sm transition-all text-main placeholder-stone-400" />
         </div>
 
         <div class="space-y-4">
             <div v-if="pending" class="text-sm text-muted animate-pulse">Searching...</div>
 
             <NuxtLink v-for="result in results" :key="result.id" :to="`/garden/notes/${result.id}`"
-                class="block p-5 rounded-2xl border border-transparent bg-white hover:border-soft hover:shadow-sm transition-all group">
+                class="block p-5 rounded-2xl border border-transparent bg-card hover:border-soft hover:shadow-sm transition-all group">
                 <div class="flex items-center gap-2 mb-1">
                     <span class="text-lg">{{ growthIcon(result.growthStage) }}</span>
                     <span
@@ -59,7 +59,7 @@ const growthIcon = (stage: string) => {
             </NuxtLink>
 
             <div v-if="query && !pending && !results?.length"
-                class="text-center py-12 border-2 border-dashed border-stone-100 rounded-2xl">
+                class="text-center py-12 border-2 border-dashed border-soft rounded-2xl">
                 <p class="text-muted">No results found for "{{ query }}"</p>
             </div>
         </div>

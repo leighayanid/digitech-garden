@@ -66,14 +66,14 @@ const sections = [
                     </div>
                     <div class="relative z-10 flex items-center justify-between">
                         <div>
-                            <div class="flex items-center gap-2 mb-2 text-stone-300">
+                            <div class="flex items-center gap-2 mb-2 text-subtle">
                                 <UIcon name="i-heroicons-sparkles" class="w-5 h-5" />
                                 <span class="text-sm font-medium uppercase tracking-wider">New Feature</span>
                             </div>
                             <h2 class="text-2xl font-serif mb-2">Talk to your Garden AI</h2>
-                            <p class="text-stone-400 max-w-md">Brainstorm ideas, refactor code, and organize your thoughts with your personal AI assistant.</p>
+                            <p class="text-subtle max-w-md">Brainstorm ideas, refactor code, and organize your thoughts with your personal AI assistant.</p>
                         </div>
-                        <div class="bg-white text-black px-4 py-2 rounded-lg font-medium text-sm group-hover:scale-105 transition-transform">
+                        <div class="bg-card text-main px-4 py-2 rounded-lg font-medium text-sm group-hover:scale-105 transition-transform">
                             Start Chatting &rarr;
                         </div>
                     </div>
@@ -84,7 +84,7 @@ const sections = [
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div v-for="section in sections" :key="section.title" class="space-y-4">
                 <div class="flex items-center gap-3 mb-2">
-                    <div class="p-2 rounded-lg bg-stone-100 text-stone-600">
+                    <div class="p-2 rounded-lg bg-hover text-muted">
                         <UIcon :name="section.icon" class="w-6 h-6" />
                     </div>
                     <div>
@@ -95,11 +95,11 @@ const sections = [
 
                 <div class="space-y-3">
                     <div v-for="item in section.items" :key="item.title"
-                        class="p-4 rounded-xl border border-soft hover:border-stone-300 hover:shadow-sm transition-all bg-white/50 backdrop-blur-sm group cursor-pointer">
-                        <h3 class="font-medium text-stone-800 group-hover:text-black transition-colors mb-1">
+                        class="p-4 rounded-xl border border-soft hover:border-DEFAULT hover:shadow-sm transition-all bg-card/50 backdrop-blur-sm group cursor-pointer">
+                        <h3 class="font-medium text-main group-hover:text-main transition-colors mb-1">
                             {{ item.title }}
                         </h3>
-                        <p class="text-sm text-muted group-hover:text-stone-600 transition-colors">
+                        <p class="text-sm text-muted group-hover:text-muted transition-colors">
                             {{ item.description }}
                         </p>
                     </div>
