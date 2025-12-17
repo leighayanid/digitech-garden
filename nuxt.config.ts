@@ -42,6 +42,7 @@ export default defineNuxtConfig({
   nitro: {
     alias: {
       '#lib': fileURLToPath(new URL('./lib', import.meta.url)),
+      '#root': fileURLToPath(new URL('./', import.meta.url)),
     },
   },
 })

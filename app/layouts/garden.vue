@@ -28,48 +28,92 @@ function toggleColorMode() {
 </script>
 
 <template>
-    <div class="min-h-screen bg-body text-base">
+    <div class="min-h-screen bg-body">
         <!-- Sidebar -->
         <aside
-            class="fixed left-0 top-0 bottom-0 w-64 border-r border-DEFAULT bg-card p-6 flex flex-col transition-all duration-300">
-            <div class="mb-10 px-2">
-                <NuxtLink to="/garden"
-                    class="font-serif text-xl font-medium tracking-tight text-main hover:text-muted transition-colors">
-                    🌿 Digitech Garden
+            class="fixed left-0 top-0 bottom-0 w-72 border-r border-DEFAULT bg-card flex flex-col">
+
+            <!-- Logo Section -->
+            <div class="px-6 py-8 border-b border-DEFAULT">
+                <NuxtLink to="/garden" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-accent flex items-center justify-center">
+                        <span class="text-white text-lg">🌿</span>
+                    </div>
+                    <div>
+                        <span class="font-heading text-lg text-main block leading-tight">
+                            Digital Garden
+                        </span>
+                        <span class="text-xs text-subtle">Cultivate knowledge</span>
+                    </div>
                 </NuxtLink>
             </div>
 
-            <nav class="space-y-2 flex-1">
-                <NuxtLink v-for="item in navigation" :key="item.to" :to="item.to"
-                    class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-muted hover:bg-hover hover:text-main transition-all group"
-                    active-class="bg-hover text-main font-medium">
-                    <UIcon :name="item.icon" class="size-5 group-hover:scale-110 transition-transform" />
-                    {{ item.label }}
+            <!-- Navigation -->
+            <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+                <NuxtLink
+                    v-for="item in navigation"
+                    :key="item.to"
+                    :to="item.to"
+                    class="sidebar-link group"
+                    active-class="active">
+                    <UIcon
+                        :name="item.icon"
+                        class="size-5 transition-transform group-hover:scale-110" />
+                    <span>{{ item.label }}</span>
                 </NuxtLink>
             </nav>
 
-            <div class="mt-auto px-2">
-                <div class="border-t border-DEFAULT pt-4 mb-4">
-                    <div class="text-sm text-muted mb-3 font-medium truncate px-2">
-                        {{ (user as any)?.name || (user as any)?.email || 'User' }}
+            <!-- User Section -->
+            <div class="px-4 py-4 border-t border-DEFAULT bg-muted/30">
+                <!-- User Info -->
+                <div class="px-3 py-2 mb-3">
+                    <div class="text-sm font-semibold text-main truncate">
+                        {{ (user as any)?.name || 'User' }}
                     </div>
-                    <UButton size="md" color="neutral" variant="ghost" block
-                        class="justify-start text-muted hover:text-main mb-2" @click="toggleColorMode">
-                        <UIcon :name="colorMode.value === 'dark' ? 'i-heroicons-sun' : 'i-heroicons-moon'" class="mr-2" />
-                        {{ colorMode.value === 'dark' ? 'Light' : 'Dark' }} Mode
-                    </UButton>
-                    <UButton size="md" color="neutral" variant="ghost" block
-                        class="justify-start text-muted hover:text-red-500" @click="handleLogout">
-                        <UIcon name="i-heroicons-arrow-right-on-rectangle" class="mr-2" />
-                        Sign out
-                    </UButton>
+                    <div class="text-xs text-subtle truncate">
+                        {{ (user as any)?.email || '' }}
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="space-y-1">
+                    <button
+                        @click="toggleColorMode"
+                        class="sidebar-link w-full justify-between">
+                        <div class="flex items-center gap-3">
+                            <UIcon
+                                :name="colorMode.value === 'dark' ? 'i-heroicons-sun' : 'i-heroicons-moon'"
+                                class="size-5" />
+                            <span>{{ colorMode.value === 'dark' ? 'Light' : 'Dark' }} Mode</span>
+                        </div>
+                        <div class="w-8 h-5 rounded-full bg-hover flex items-center px-0.5 transition-colors"
+                             :class="colorMode.value === 'dark' ? 'justify-end bg-accent-light' : 'justify-start'">
+                            <div class="w-4 h-4 rounded-full bg-card shadow-sm transition-all"
+                                 :class="colorMode.value === 'dark' ? 'bg-accent' : ''"></div>
+                        </div>
+                    </button>
+
+                    <button
+                        @click="handleLogout"
+                        class="sidebar-link w-full text-error hover:bg-error/10">
+                        <UIcon name="i-heroicons-arrow-right-on-rectangle" class="size-5" />
+                        <span>Sign out</span>
+                    </button>
                 </div>
             </div>
         </aside>
 
         <!-- Main content -->
-        <main class="ml-64 p-8 max-w-5xl mx-auto transition-all duration-300">
-            <slot />
+        <main class="ml-72 min-h-screen">
+            <div class="max-w-5xl mx-auto px-8 py-10">
+                <slot />
+            </div>
         </main>
     </div>
 </template>
+
+<style scoped>
+.text-error {
+    color: var(--color-error);
+}
+</style>

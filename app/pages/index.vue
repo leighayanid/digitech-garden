@@ -6,41 +6,49 @@ definePageMeta({
 const features = [
     {
         title: 'Capture',
-        description: 'Plant your initial thoughts as seeds. Quickly jot down ideas before they fade away.',
+        description: 'Plant your thoughts as seeds. Quick capture before ideas fade into the ether.',
         icon: 'i-heroicons-sparkles',
-        color: 'growth-seedling'
+        stage: 'seedling'
     },
     {
         title: 'Nurture',
-        description: 'Water your seeds with research and refined thinking. Watch them sprout into seedlings.',
+        description: 'Water with research and reflection. Watch seedlings grow into budding concepts.',
         icon: 'i-heroicons-beaker',
-        color: 'growth-budding'
+        stage: 'budding'
     },
     {
         title: 'Harvest',
-        description: 'Turn your matured evergreen notes into articles, projects, or shared wisdom.',
+        description: 'Mature evergreen notes become articles, projects, and shared wisdom.',
         icon: 'i-heroicons-book-open',
-        color: 'growth-evergreen'
+        stage: 'evergreen'
     }
+]
+
+const stats = [
+    { value: '∞', label: 'Ideas Waiting' },
+    { value: '24/7', label: 'Always Growing' },
+    { value: '100%', label: 'Yours Forever' }
 ]
 </script>
 
 <template>
-    <!-- Theme-aware landing page -->
-    <div class="min-h-screen bg-body text-main font-sans selection:bg-hover">
+    <div class="min-h-screen bg-body">
 
-        <!-- Navigation / Header -->
-        <header class="fixed top-0 inset-x-0 z-50 bg-body/80 backdrop-blur-md border-b border-DEFAULT">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <UIcon name="i-heroicons-globe-alt" class="w-6 h-6 text-accent" />
-                    <span class="font-serif font-medium text-lg tracking-tight text-main">Digitech Garden</span>
-                </div>
-                <div class="flex items-center gap-4">
-                    <UButton to="/login" color="neutral" variant="ghost" size="sm" class="font-medium">
+        <!-- Navigation -->
+        <header class="fixed top-0 inset-x-0 z-50 bg-body/80 backdrop-blur-xl border-b border-DEFAULT">
+            <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+                <NuxtLink to="/" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
+                        <span class="text-white text-sm">🌿</span>
+                    </div>
+                    <span class="font-heading text-lg text-main">Digital Garden</span>
+                </NuxtLink>
+
+                <div class="flex items-center gap-3">
+                    <UButton to="/login" variant="ghost" size="md" class="font-heading font-medium">
                         Sign In
                     </UButton>
-                    <UButton to="/register" color="neutral" variant="solid" size="sm" class="font-medium">
+                    <UButton to="/register" size="md" class="font-heading font-semibold bg-accent hover:bg-accent-hover text-white">
                         Get Started
                     </UButton>
                 </div>
@@ -48,67 +56,174 @@ const features = [
         </header>
 
         <!-- Hero Section -->
-        <main class="pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pb-32 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <section class="pt-32 pb-24 lg:pt-40 lg:pb-32 relative overflow-hidden">
+            <!-- Background Decorations -->
+            <div class="absolute top-20 -left-32 w-96 h-96 rounded-full bg-accent/5 blur-3xl animate-pulse-soft"></div>
+            <div class="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-secondary/5 blur-3xl animate-pulse-soft delay-200"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-accent/3 blur-3xl"></div>
 
-                <!-- Background Decoration -->
-                <div class="absolute -top-24 -left-24 w-96 h-96 bg-accent/10 dark:bg-accent/20 rounded-full blur-3xl opacity-60 pointer-events-none animate-pulse"></div>
-                <div class="absolute top-1/2 -right-24 w-80 h-80 bg-hover dark:bg-elevated rounded-full blur-3xl opacity-60 pointer-events-none"></div>
-
-                <div class="max-w-2xl mx-auto text-center relative z-10 animate-fade-in-up">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-medium mb-8">
+            <div class="max-w-6xl mx-auto px-6 relative z-10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-light border border-accent/20 mb-8 animate-fade-in-up">
                         <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                        Now in active bloom
+                        <span class="text-sm font-medium text-accent">Now cultivating ideas</span>
                     </div>
 
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-medium tracking-tight text-main mb-6 leading-[1.1]">
-                        Cultivate your <br/>
-                        <span class="text-accent italic">digital wisdom</span>
+                    <!-- Main Headline -->
+                    <h1 class="font-heading text-5xl sm:text-6xl lg:text-7xl text-main mb-6 leading-[1.05] tracking-tight animate-fade-in-up delay-100">
+                        Where ideas
+                        <br />
+                        <span class="font-serif italic text-accent">bloom & grow</span>
                     </h1>
 
-                    <p class="text-lg sm:text-xl text-muted mb-10 leading-relaxed delay-100 animate-fade-in-up">
-                        A serene space to capture thoughts, nurture ideas, and grow your personal knowledge base into a thriving ecosystem.
+                    <!-- Subheadline -->
+                    <p class="text-xl lg:text-2xl text-muted max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in-up delay-200">
+                        A beautiful space to capture thoughts, nurture connections, and cultivate your personal knowledge ecosystem.
                     </p>
 
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 delay-200 animate-fade-in-up">
-                        <UButton to="/register" size="xl" block class="sm:w-auto px-8 shadow-xl">
-                            Start Cultivating
-                        </UButton>
-                        <UButton to="/login" variant="ghost" size="xl" block class="sm:w-auto px-8">
-                            Enter Garden
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-300">
+                        <UButton to="/register" size="xl" class="px-8 py-4 font-heading font-semibold bg-accent hover:bg-accent-hover text-white shadow-lg hover:shadow-xl transition-all">
+                            Start Your Garden
                             <template #trailing>
-                                <UIcon name="i-heroicons-arrow-right" />
+                                <UIcon name="i-heroicons-arrow-right" class="ml-1" />
                             </template>
                         </UButton>
+                        <UButton to="/login" variant="ghost" size="xl" class="px-8 py-4 font-heading font-medium">
+                            Enter Garden
+                        </UButton>
                     </div>
                 </div>
 
-                <!-- Feature Grid -->
-                <div class="mt-24 sm:mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 delay-300 animate-fade-in-up">
-                    <div v-for="feature in features" :key="feature.title"
-                         class="group card-soft p-8">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-hover group-hover:bg-elevated transition-colors">
-                            <UIcon :name="feature.icon" :class="`w-6 h-6 ${feature.color}`" />
-                        </div>
-                        <h3 class="text-xl font-serif font-medium text-main mb-3">{{ feature.title }}</h3>
-                        <p class="text-muted leading-relaxed">{{ feature.description }}</p>
+                <!-- Stats Row -->
+                <div class="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-in-up delay-400">
+                    <div v-for="stat in stats" :key="stat.label" class="text-center">
+                        <div class="font-heading text-3xl lg:text-4xl font-bold text-main mb-1">{{ stat.value }}</div>
+                        <div class="text-sm text-subtle uppercase tracking-wider">{{ stat.label }}</div>
                     </div>
                 </div>
-
             </div>
-        </main>
+        </section>
 
-        <!-- Simple Footer -->
-        <footer class="border-t border-DEFAULT bg-hover py-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <p class="font-serif text-main text-lg mb-2">Digitech Garden</p>
-                <p class="text-muted text-sm">© {{ new Date().getFullYear() }} All rights reserved.</p>
+        <!-- Features Section -->
+        <section class="py-24 lg:py-32 bg-muted/30">
+            <div class="max-w-6xl mx-auto px-6">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-4xl lg:text-5xl text-main mb-4">
+                        The Growth Cycle
+                    </h2>
+                    <p class="text-lg text-muted max-w-xl mx-auto">
+                        Every great idea follows a natural path from seed to harvest.
+                    </p>
+                </div>
+
+                <!-- Feature Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                    <div
+                        v-for="(feature, index) in features"
+                        :key="feature.title"
+                        class="card-elevated p-8 lg:p-10 group animate-fade-in-up"
+                        :style="{ animationDelay: `${index * 100 + 100}ms` }">
+
+                        <!-- Icon -->
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110"
+                             :class="{
+                                 'bg-seedling/10': feature.stage === 'seedling',
+                                 'bg-budding/10': feature.stage === 'budding',
+                                 'bg-evergreen/10': feature.stage === 'evergreen'
+                             }">
+                            <UIcon
+                                :name="feature.icon"
+                                class="size-7"
+                                :class="{
+                                    'growth-seedling': feature.stage === 'seedling',
+                                    'growth-budding': feature.stage === 'budding',
+                                    'growth-evergreen': feature.stage === 'evergreen'
+                                }" />
+                        </div>
+
+                        <!-- Content -->
+                        <h3 class="font-heading text-2xl text-main mb-3">{{ feature.title }}</h3>
+                        <p class="text-muted leading-relaxed">{{ feature.description }}</p>
+
+                        <!-- Stage Indicator -->
+                        <div class="mt-6 pt-6 border-t border-DEFAULT">
+                            <span
+                                class="inline-flex items-center gap-2 text-sm font-medium px-3 py-1 rounded-full"
+                                :class="`badge-${feature.stage}`">
+                                <span class="w-1.5 h-1.5 rounded-full"
+                                      :class="{
+                                          'bg-seedling': feature.stage === 'seedling',
+                                          'bg-budding': feature.stage === 'budding',
+                                          'bg-evergreen': feature.stage === 'evergreen'
+                                      }"></span>
+                                {{ feature.stage.charAt(0).toUpperCase() + feature.stage.slice(1) }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote Section -->
+        <section class="py-24 lg:py-32">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <blockquote class="font-serif text-3xl lg:text-4xl text-main italic leading-relaxed mb-8 animate-fade-in-up">
+                    "The best time to plant a tree was twenty years ago.
+                    <br />
+                    The second best time is now."
+                </blockquote>
+                <cite class="text-muted text-lg not-italic animate-fade-in-up delay-100">— Chinese Proverb</cite>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24 lg:py-32 bg-accent">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="font-heading text-4xl lg:text-5xl text-white mb-6">
+                    Ready to cultivate?
+                </h2>
+                <p class="text-xl text-white/80 mb-10 max-w-xl mx-auto">
+                    Join a growing community of thinkers, creators, and lifelong learners.
+                </p>
+                <UButton to="/register" size="xl" variant="solid" class="px-10 py-4 font-heading font-semibold bg-white text-accent hover:bg-white/90 shadow-xl">
+                    Start Your Garden Free
+                    <template #trailing>
+                        <UIcon name="i-heroicons-arrow-right" />
+                    </template>
+                </UButton>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 bg-card border-t border-DEFAULT">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
+                            <span class="text-white text-sm">🌿</span>
+                        </div>
+                        <span class="font-heading text-lg text-main">Digital Garden</span>
+                    </div>
+                    <p class="text-sm text-subtle">
+                        © {{ new Date().getFullYear() }} Digital Garden. Cultivate your wisdom.
+                    </p>
+                </div>
             </div>
         </footer>
-
     </div>
 </template>
 
 <style scoped>
-/* Specific overrides if needed, but Tailwind classes cover most */
+.bg-seedling\/10 {
+    background-color: color-mix(in srgb, var(--color-seedling) 10%, transparent);
+}
+.bg-budding\/10 {
+    background-color: color-mix(in srgb, var(--color-budding) 10%, transparent);
+}
+.bg-evergreen\/10 {
+    background-color: color-mix(in srgb, var(--color-evergreen) 10%, transparent);
+}
 </style>
