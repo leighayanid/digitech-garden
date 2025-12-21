@@ -1,4 +1,5 @@
 import { fileURLToPath } from 'node:url'
+import { resolve } from 'node:path'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -43,6 +44,15 @@ export default defineNuxtConfig({
     alias: {
       '#lib': fileURLToPath(new URL('./lib', import.meta.url)),
       '#root': fileURLToPath(new URL('./', import.meta.url)),
+    },
+  },
+
+  // Fix Prisma client resolution for Vercel production builds
+  vite: {
+    resolve: {
+      alias: {
+        '.prisma/client/index-browser': resolve('./node_modules/.prisma/client/index-browser.js'),
+      },
     },
   },
 })
